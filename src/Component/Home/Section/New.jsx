@@ -10,7 +10,7 @@ function New() {
     let [data, setData] = useState([]);
 
     let fetchData = async () => {
-        let responce = await fetch(`http://localhost:3000/news`);
+        let responce = await fetch(`https://sleepy-plum-coveralls.cyclic.app/news`);
         let data = await responce.json();
         // console.log(data);
         setData(data);

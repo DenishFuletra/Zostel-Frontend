@@ -4,7 +4,7 @@ const getLocationData = (params) => (dispatch) => {
   //console.log(params);
   dispatch({ type: types.GET_LOCATIONDATA_REQUEST });
   return axios
-    .get(`http://localhost:3000/booking?city=${params}`)
+    .get(`https://sleepy-plum-coveralls.cyclic.app/booking?city=${params}`)
     .then((res) => {
       let data = res.data;
       console.log(data);

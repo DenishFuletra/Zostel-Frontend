@@ -16,15 +16,18 @@ import {
 import { useState, useRef } from "react";
 import ps from "./Payment.module.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-export default function SummaryBox2() {
+export default function SummaryBox2({ orderdata }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [togl, setTogl] = useState(true);
   const [input, setInput] = useState("");
   const obj = useRef();
   const [len, setlen] = useState(0);
 
+
   const { countRoom } = useContext(ContextData);
+  //console.log(countRoom);
   let data = JSON.parse(localStorage.getItem("data"));
   function getDays() {
     let start = new Date(data.startDate);
@@ -57,7 +60,12 @@ export default function SummaryBox2() {
   function payPrice() {
     return Math.ceil(finalPrice() / 2);
   }
-  console.log(taxPrice());
+
+  async function SubmitOrderData() {
+    await axios.post("https://sleepy-plum-coveralls.cyclic.app/order", orderdata);
+    onOpen()
+  }
+
   return (
     <div>
       <div>
@@ -141,7 +149,7 @@ export default function SummaryBox2() {
           </strong>
         </div>
         <div id="bookbtn">
-          <Button id="booknow" onClick={onOpen}>
+          <Button id="booknow" onClick={() => { SubmitOrderData() }}>
             <Link
               to={"/confirmbooking"}
               style={{ textDecoration: "none", color: "white" }}

@@ -6,7 +6,7 @@ function Destinations() {
     const [data, setData] = useState([]);
 
     const Destination = async () => {
-        const res = await fetch('http://localhost:3000/destination');
+        const res = await fetch('https://sleepy-plum-coveralls.cyclic.app/destination');
         const data = await res.json();
         setData(data);
         console.log(data);

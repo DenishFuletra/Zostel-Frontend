@@ -1,6 +1,6 @@
 // import style from "../components/Footer/footer.module.css";
 import style from "../ConfirmBooking/ConfirmBooking.module.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ContextData } from "../Context/ContextData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,6 +19,43 @@ function ConfirmBooking() {
   const days = getDays();
   let start = new Date(data.startDate);
   const { countRoom } = useContext(ContextData);
+  const [order, setOrder] = useState(
+    {
+      name: "",
+      Mname: "",
+      Lname: "",
+      gender: "",
+      email: "",
+      phone: "",
+      address: "",
+      summary: [{
+        room1: countRoom.room1,
+        room1name: countRoom.room1name,
+        room1price: countRoom.room1price,
+        room2: countRoom.room2,
+        room2name: countRoom.room2name,
+        room2price: countRoom.room2price,
+        room3: countRoom.room3,
+        room3name: countRoom.room3name,
+        room3price: countRoom.room3price,
+        total: +(countRoom.room1 * countRoom.room1price) + +(countRoom.room2 * countRoom.room2price) + +(countRoom.room3 * countRoom.room3price),
+        tax: ((+(countRoom.room1 * countRoom.room1price) + +(countRoom.room2 * countRoom.room2price) + +(countRoom.room3 * countRoom.room3price)) * 18) / 100
+      }]
+
+
+    }
+  );
+  console.log(order);
+  let updateOrder = (e) => {
+    setOrder(
+      {
+        ...order, [e.target.name]: e.target.value
+      }
+    )
+    console.log(order);
+
+
+  }
   return (
     <div>
       <h1 id={style.heading}>Confirm your booking</h1>
@@ -40,19 +77,19 @@ function ConfirmBooking() {
 
             <div className={style.name_div} style={{ marginLeft: "-50px" }}>
               <label htmlFor="">Name</label>
-              <input type="text" placeholder="Enter the first name" />
-              <input placeholder="Enter your middle name" />
-              <input placeholder="Enter your last name" />
+              <input type="text" placeholder="Enter the first name" name="name" onChange={(e) => { updateOrder(e) }} />
+              <input placeholder="Enter your middle name" name="Mname" onChange={(e) => { updateOrder(e) }} />
+              <input placeholder="Enter your last name" name="Lname" onChange={(e) => { updateOrder(e) }} />
               <br />
             </div>
             <div className={style.select_div}>
               <label style={{ paddingRight: "10px" }} htmlFor="">
                 Gender
               </label>
-              <select style={{ width: "78%" }} name="" id="">
+              <select style={{ width: "78%" }} name="gender" id="" onChange={(e) => { updateOrder(e) }} >
                 <option value="">Select</option>
-                <option value="">Male</option>
-                <option value="">Female</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
               <br />
               <label style={{ paddingRight: "23px" }} htmlFor="">
@@ -62,6 +99,8 @@ function ConfirmBooking() {
                 style={{ width: "76%", marginRight: "0px" }}
                 type="text"
                 placeholder="Enter your email"
+                name="email"
+                onChange={(e) => { updateOrder(e) }}
               />
               <br />
 
@@ -70,6 +109,8 @@ function ConfirmBooking() {
                 style={{ width: "76%", marginRight: "0px" }}
                 type="number"
                 placeholder="Enter your number"
+                name="phone"
+                onChange={(e) => { updateOrder(e) }}
               />
 
               <label style={{ paddingRight: "14px" }} htmlFor="">
@@ -80,6 +121,8 @@ function ConfirmBooking() {
                 type="text"
                 placeholder="Enter your address"
                 className={style.address}
+                name="address"
+                onChange={(e) => { updateOrder(e) }}
               />
             </div>
             <hr />
@@ -181,10 +224,12 @@ function ConfirmBooking() {
               />
             </p>
           </p>
-          <SummaryBox2 />
+          <SummaryBox2 orderdata={order} />
         </div>
       </div>
     </div>
   );
 }
 export default ConfirmBooking;
+
+

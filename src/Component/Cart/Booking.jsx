@@ -111,7 +111,7 @@ export default function Booking() {
                   dateFormat="E dd MMMM,yyyy"
                   endDate={endDate}
                   minDate={new Date()}
-                  // excludeDates={[new Date(), subDays(new Date(), 1)]}
+                // excludeDates={[new Date(), subDays(new Date(), 1)]}
                 />
               </div>
               <div>
