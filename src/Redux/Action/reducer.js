@@ -15,6 +15,7 @@ function reducer(state = bookingData, action) {
         locationLoadError: false,
       };
     case types.GET_LOCATIONDATA_SUCCESS:
+      console.log(state);
       return {
         ...state,
         locationdata: payload,

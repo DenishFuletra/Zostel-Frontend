@@ -3,6 +3,7 @@ export default function Navbox() {
   const cityname = useSelector(
     (state) => state.locationReducer.locationdata.city
   );
+  //console.log(cityname);
   return (
     <div>
       <h4

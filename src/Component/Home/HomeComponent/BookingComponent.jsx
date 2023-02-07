@@ -26,7 +26,7 @@ const options = [
 ];
 export default function BookingComponent() {
   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(selectedOption);
+  //console.log(selectedOption);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [option, setOption] = useState("DESTINATION");
@@ -40,15 +40,15 @@ export default function BookingComponent() {
     };
     localStorage.setItem("data", JSON.stringify(data));
     let date = JSON.parse(localStorage.getItem("data"));
-    console.log(date);
+   // console.log(date);
     let end = new Date(date.endDate);
     let start = new Date(date.startDate);
     let difference = end.getTime() - start.getTime();
     let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
-    console.log(data.endDate);
-    console.log(TotalDays);
+    //console.log(data.endDate);
+    //console.log(TotalDays);
 
-    console.log("hello");
+    //console.log("hello");
   };
   return (
     <div id="main-booking-container">
